@@ -19,6 +19,8 @@ func (app *application) routes() http.Handler {
 	mux.Get("/movies/{id}", app.GetMovie)
 	mux.Get(("/genres"), app.AllGenres)
 
+	mux.Get("/movies/genres/{genre_id}", app.AllMoviesByGenre)
+
 	mux.Post("/authenticate", app.authentication)
 	mux.Get("/refresh", app.refreshToken)
 	mux.Get("/logout", app.logout)
@@ -28,6 +30,8 @@ func (app *application) routes() http.Handler {
 		mux.Get("/movies", app.MovieCatalog)
 		mux.Post("/movies/{id}", app.GetMovieForEdit)
 		mux.Put("/movies/0", app.InsertMovie)
+		mux.Patch("/movies/{id}", app.UpdateMovie)
+		mux.Delete("/movies/{id}", app.DeleteMovie)
 	})
 
 	return mux
